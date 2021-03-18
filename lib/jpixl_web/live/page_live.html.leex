@@ -1,0 +1,29 @@
+<div class="window">
+  <div class="title-bar">
+    <div class="title-bar-text">
+      JPIXL | v98
+    </div>
+    <div class="title-bar-controls">
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="window-body">
+    <fieldset>
+        <div class="working-area">
+            <div class="wrapper">
+                <div class="toolbar-grid">
+                </div>
+                <div class="working-grid">
+                    <div class="drawing-area">
+                        <%= for row <- 1..32 do %>
+                            <%= for column <- 1..32 do %>
+                                <%= live_component @socket, JpixlWeb.Component.Cell, id: "cell_#{row}_#{column}" %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+  </div>
+</div>
