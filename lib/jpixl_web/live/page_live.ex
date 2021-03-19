@@ -7,6 +7,8 @@ defmodule JpixlWeb.PageLive do
       socket
       |> assign(primary_color: "black")
       |> assign(secondary_color: "")
+      |> assign(canvas_height: 32)
+      |> assign(canvas_width: 32)
     {:ok, socket}
   end
 
@@ -34,5 +36,14 @@ defmodule JpixlWeb.PageLive do
     }
   end
 
-
+  def handle_event("update_canvas", form, socket) do
+    IO.inspect form
+    {height, _} = Integer.parse(form["canvas_height"])
+    {width, _} = Integer.parse(form["canvas_width"])
+    {:noreply, socket
+     |> assign(canvas_height: height)
+     |> assign(canvas_width: width)
+    }
   end
+
+end
