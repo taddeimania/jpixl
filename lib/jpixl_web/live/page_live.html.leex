@@ -26,11 +26,7 @@
                         </fieldset>
                     </div>
                     <form phx-submit="update_canvas">
-                        <div class="field-row-stacked" style="width: 200px; margin-top: 64px">
-                            <label for="canvas_width">Canvas Width (pixels)</label>
-                            <input id="canvas_width" name="canvas_width" type="number" min="1" max="32" value="<%= @canvas_width %>"/>
-                        </div>
-                        <div class="field-row-stacked" style="width: 200px">
+v                        <div class="field-row-stacked" style="width: 200px">
                             <label for="canvas_height">Canvas Height (pixels)</label>
                             <input id="canvas_height" name="canvas_height" type="number" min="1" max="32" value="<%= @canvas_height %>" />
                         </div>
@@ -38,15 +34,33 @@
                         <div class="field-row-stacked" style="width: 200px">
                             <button id="submit" type="submit">Update Canvas</button>
                         </div>
+                        <div class="preview-area">
+                            <%= for row <- 0..@canvas_width-1 do %>
+                                <div>
+                                    <%= for column <- 0..@canvas_height-1 do %>
+                                        <div class="preview-grid-box">
+                                            <div style="background-color: <%= get_pixel(@state, row, column) %>" class="cell-contents">
+                                            </div>
+                                        </div>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </form>
+                    <form phx-change="set_grid">
+                        <div class="field-row-stacked" style="width: 200px; margin-top: 12px">
+                            <input <%= if @show_grid === true do %>checked<% end %> type="checkbox" id="show_grid" name="show_grid">
+                            <label for="show_grid">Show Grid?</label>
+                        </div>
                     </form>
                 </div>
                 <div class="working-grid">
                     <fieldset>
                         <div class="drawing-area">
-                            <%= for row <- 1..@canvas_width do %>
+                            <%= for row <- 0..@canvas_width-1 do %>
                                 <div>
-                                    <%= for column <- 1..@canvas_height do %>
-                                        <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}" %>
+                                    <%= for column <- 0..@canvas_height-1 do %>
+                                        <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", row: row, column: column, show_grid: @show_grid %>
                                     <% end %>
                                 </div>
                             <% end %>

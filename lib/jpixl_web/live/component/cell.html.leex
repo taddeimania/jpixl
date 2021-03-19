@@ -1,5 +1,12 @@
 <div class="grid-box" phx-target="<%= @myself %>"
-     oncontextmenu="return false;" phx-hook="Clicky" data-ref="<%= @id %>">
+     oncontextmenu="return false;" phx-hook="Clicky" data-ref="<%= @id %>"
+     data-row="<%= @row %>" data-column="<%= @column %>"
+     <%= if @show_grid === true do %>
+     style="border: 1px solid #F0F0F0;
+         box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;"
+    <% end %>>
     <div style="background-color: <%= @fill_color %>" class="cell-contents">
     </div>
 </div>

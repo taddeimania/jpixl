@@ -18,21 +18,22 @@ import topbar from "topbar"
 import {LiveSocket} from "phoenix_live_view"
 
 let Hooks = {}
-
 Hooks.Clicky = {
     mounted(){
         this.el.addEventListener('mousedown', e => {
+            let data = e.currentTarget.dataset
             if (e.button === 2) {
-                this.pushEvent("paint_cell_secondary_color", e.currentTarget.dataset.ref);
+                this.pushEvent("paint_cell_secondary_color", data);
             } else {
-                this.pushEvent("paint_cell_primary_color", e.currentTarget.dataset.ref);
+                this.pushEvent("paint_cell_primary_color", data);
             }
         });
         this.el.addEventListener('mouseover', e => {
+            let data = e.currentTarget.dataset
             if (e.buttons === 2) {
-                this.pushEvent("paint_cell_secondary_color", e.currentTarget.dataset.ref);
+                this.pushEvent("paint_cell_secondary_color", data);
             } else if (e.buttons === 1) {
-                this.pushEvent("paint_cell_primary_color", e.currentTarget.dataset.ref);
+                this.pushEvent("paint_cell_primary_color", data);
             }
         });
     }
@@ -40,14 +41,33 @@ Hooks.Clicky = {
 Hooks.ColorPick = {
     mounted(){
         this.el.addEventListener('mousedown', e => {
-            if (e.button == 2) {
+            if (e.button === 2) {
                 this.pushEvent("set_secondary_color", e.currentTarget.dataset.color);
             } else {
                 this.pushEvent("set_primary_color", e.currentTarget.dataset.color);
             }
         });
     }
-
+}
+Hooks.DragWindow = {
+    mounted(){
+        // Modal window code DONT TOUCH!
+        /*
+        this.el.addEventListener('mousedown', e => {
+            let shiftX = e.clientX - this.el.getBoundingClientRect().left;
+            let shiftY = e.clientY - this.el.getBoundingClientRect().top;
+            let move = e => {
+                this.el.style.left = e.pageX - shiftX + 'px';
+                this.el.style.top = e.pageY - shiftY + 'px';
+            }
+            this.el.addEventListener('mousemove', move);
+            this.el.addEventListener('mouseup', e => {
+                this.el.removeEventListener('mousemove', move);
+                this.el.onmouseup = null;
+            });
+        });
+        */
+    }
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
