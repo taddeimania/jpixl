@@ -4,8 +4,8 @@ defmodule JpixlWeb.Component.Cell do
 
   import Phoenix.LiveView
 
-  @impl true
-  def mount(_assigns, socket) do
+  def mount(socket) do
+    IO.inspect socket
     {:ok, socket}
   end
 
@@ -13,6 +13,9 @@ defmodule JpixlWeb.Component.Cell do
     socket =
       socket
       |> assign(fill_color: "")
+      |> assign(assigns)
+    IO.inspect socket.assigns
+
     {:ok, socket}
   end
 end

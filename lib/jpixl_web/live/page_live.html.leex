@@ -14,10 +14,11 @@
                 <div class="toolbar-grid">
                 </div>
                 <div class="working-grid">
+
                     <div class="drawing-area">
                         <%= for row <- 1..32 do %>
                             <%= for column <- 1..32 do %>
-                                <%= live_component @socket, JpixlWeb.Component.Cell, id: "cell_#{row}_#{column}" %>
+                                <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", reference: "#{row}_#{column}" %>
                             <% end %>
                         <% end %>
                     </div>

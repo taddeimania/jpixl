@@ -23,9 +23,9 @@ Hooks.Clicky = {
     mounted(){
         this.el.addEventListener('mousedown', e => {
             if (e.button == 2) {
-                this.pushEvent("clear_cell", e.currentTarget.phxHookId);
+                this.pushEvent("clear_cell", e.currentTarget.dataset.ref);
             } else {
-                this.pushEvent("paint_cell", e.currentTarget.phxHookId);
+                this.pushEvent("paint_cell", e.currentTarget.dataset.ref);
             }
         });
     }
