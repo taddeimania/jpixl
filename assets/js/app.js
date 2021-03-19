@@ -16,7 +16,7 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import topbar from "topbar"
 import {LiveSocket} from "phoenix_live_view"
-
+let SHOW_GRID = false;
 let Hooks = {}
 Hooks.Clicky = {
     mounted(){
@@ -30,10 +30,25 @@ Hooks.Clicky = {
         });
         this.el.addEventListener('mouseover', e => {
             let data = e.currentTarget.dataset
+            this.el.style = "border: 1px solid #F0F0F0;\n" +
+                "         box-sizing: border-box;\n" +
+                "    -moz-box-sizing: border-box;\n" +
+                "    -webkit-box-sizing: border-box;\"";
             if (e.buttons === 2) {
                 this.pushEvent("paint_cell_secondary_color", data);
             } else if (e.buttons === 1) {
                 this.pushEvent("paint_cell_primary_color", data);
+            }
+        });
+
+        this.el.addEventListener('mouseout', e => {
+            if (SHOW_GRID === true) {
+                this.el.style = "border: 1px solid #F0F0F0;\n" +
+                    "         box-sizing: border-box;\n" +
+                    "    -moz-box-sizing: border-box;\n" +
+                    "    -webkit-box-sizing: border-box;\"";
+            } else {
+                this.el.style = "";
             }
         });
     }
@@ -69,12 +84,24 @@ Hooks.DragWindow = {
         */
     }
 }
+Hooks.ToggleGrid = {
+    mounted() {
+        this.el.addEventListener("change", e => {
+            SHOW_GRID = !SHOW_GRID;
+        })
+    }
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket(
     "/live",
     Socket,
     {
+        dom: {
+            onBeforeElUpdated(from, to){
+                if(from.__x){ window.Alpine.clone(from.__x, to) }
+            }
+        },
         hooks: Hooks,
         params: {
             _csrf_token: csrfToken

@@ -53,7 +53,7 @@
                     </form>
                     <form phx-change="set_grid">
                         <div class="field-row-stacked" style="width: 200px; margin-top: 12px">
-                            <input <%= if @show_grid === true do %>checked<% end %> type="checkbox" id="show_grid" name="show_grid">
+                            <input phx-hook="ToggleGrid" <%= if @show_grid === true do %>checked<% end %> type="checkbox" id="show_grid" name="show_grid">
                             <label for="show_grid">Show Grid?</label>
                         </div>
                     </form>

@@ -57,8 +57,6 @@ defmodule JpixlWeb.PageLive do
   end
 
   def handle_event("set_grid", form, socket) do
-    IO.inspect form
-
     if Map.has_key?(form, "show_grid") do
       {:noreply,
         socket
