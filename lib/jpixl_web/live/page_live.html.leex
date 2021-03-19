@@ -26,7 +26,11 @@
                         </fieldset>
                     </div>
                     <form phx-submit="update_canvas">
-v                        <div class="field-row-stacked" style="width: 200px">
+                        <div class="field-row-stacked" style="width: 200px; margin-top: 12px;">
+                            <label for="canvas_width">Canvas Width (pixels)</label>
+                            <input id="canvas_width" name="canvas_width" type="number" min="1" max="32" value="<%= @canvas_width %>" />
+                        </div>
+                        <div class="field-row-stacked" style="width: 200px">
                             <label for="canvas_height">Canvas Height (pixels)</label>
                             <input id="canvas_height" name="canvas_height" type="number" min="1" max="32" value="<%= @canvas_height %>" />
                         </div>
