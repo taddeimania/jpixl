@@ -15,7 +15,6 @@ defmodule JpixlWeb.PageLive do
   end
 
   def handle_event("paint_cell_secondary_color", data, socket) do
-    send_update(JpixlWeb.Component.Cell, id: data["ref"], fill_color: socket.assigns.secondary_color)
     {row, _} = Integer.parse(data["row"])
     {column, _} = Integer.parse(data["column"])
 
@@ -26,7 +25,6 @@ defmodule JpixlWeb.PageLive do
   end
 
   def handle_event("paint_cell_primary_color", data, socket) do
-    send_update(JpixlWeb.Component.Cell, id: data["ref"], fill_color: socket.assigns.primary_color)
     {row, _} = Integer.parse(data["row"])
     {column, _} = Integer.parse(data["column"])
     {:noreply,

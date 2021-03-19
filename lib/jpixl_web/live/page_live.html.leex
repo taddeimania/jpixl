@@ -64,7 +64,7 @@
                             <%= for row <- 0..@canvas_width-1 do %>
                                 <div>
                                     <%= for column <- 0..@canvas_height-1 do %>
-                                        <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", row: row, column: column, show_grid: @show_grid %>
+                                        <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", row: row, column: column, color: get_pixel(@state, row, column), show_grid: @show_grid %>
                                     <% end %>
                                 </div>
                             <% end %>
