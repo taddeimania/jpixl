@@ -1,4 +1,4 @@
-defmodule JpixlWeb.Component.Cell do
+defmodule JpixlWeb.Component.ColorPalette do
   use Phoenix.LiveComponent
   use Phoenix.HTML
 
@@ -9,10 +9,6 @@ defmodule JpixlWeb.Component.Cell do
   end
 
   def update(assigns, socket) do
-    socket =
-      socket
-      |> assign(fill_color: "")
-      |> assign(assigns)
     {:ok, socket}
   end
 end

@@ -30,6 +30,18 @@ Hooks.Clicky = {
         });
     }
 }
+Hooks.ColorPick = {
+    mounted(){
+        this.el.addEventListener('mousedown', e => {
+            if (e.button == 2) {
+                this.pushEvent("set_secondary_color", e.currentTarget.dataset.color);
+            } else {
+                this.pushEvent("set_primary_color", e.currentTarget.dataset.color);
+            }
+        });
+    }
+
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket(

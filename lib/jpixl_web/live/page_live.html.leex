@@ -12,16 +12,33 @@
         <div class="working-area">
             <div class="wrapper">
                 <div class="toolbar-grid">
+                    <div>
+                        <%= live_component @socket, JpixlWeb.Component.ColorPalette %>
+                    </div>
+                    <div class="primary-color-view">
+                        Primary Color
+                        <fieldset style="height: 49px; width: 47px; background-color: <%= @primary_color %>;">
+                        </fieldset>
+                    </div>
+                    <div class="secondary-color-view">
+                        Secondary Color
+                        <fieldset style="height: 49px; width: 47px; background-color: <%= @secondary_color %>;">
+                        </fieldset>
+                    </div>
+                    <div class="secondary-color-view">
+
+                    </div>
                 </div>
                 <div class="working-grid">
-
-                    <div class="drawing-area">
-                        <%= for row <- 1..32 do %>
-                            <%= for column <- 1..32 do %>
-                                <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", reference: "#{row}_#{column}" %>
+                    <fieldset>
+                        <div class="drawing-area">
+                            <%= for row <- 1..32 do %>
+                                <%= for column <- 1..32 do %>
+                                    <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}" %>
+                                <% end %>
                             <% end %>
-                        <% end %>
-                    </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
         </div>
