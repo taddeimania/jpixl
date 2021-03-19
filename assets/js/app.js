@@ -22,10 +22,17 @@ let Hooks = {}
 Hooks.Clicky = {
     mounted(){
         this.el.addEventListener('mousedown', e => {
-            if (e.button == 2) {
-                this.pushEvent("clear_cell", e.currentTarget.dataset.ref);
+            if (e.button === 2) {
+                this.pushEvent("paint_cell_secondary_color", e.currentTarget.dataset.ref);
             } else {
-                this.pushEvent("paint_cell", e.currentTarget.dataset.ref);
+                this.pushEvent("paint_cell_primary_color", e.currentTarget.dataset.ref);
+            }
+        });
+        this.el.addEventListener('mouseover', e => {
+            if (e.buttons === 2) {
+                this.pushEvent("paint_cell_secondary_color", e.currentTarget.dataset.ref);
+            } else if (e.buttons === 1) {
+                this.pushEvent("paint_cell_primary_color", e.currentTarget.dataset.ref);
             }
         });
     }

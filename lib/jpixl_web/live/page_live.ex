@@ -12,12 +12,12 @@ defmodule JpixlWeb.PageLive do
     {:ok, socket}
   end
 
-  def handle_event("clear_cell", id, socket) do
+  def handle_event("paint_cell_secondary_color", id, socket) do
     send_update(JpixlWeb.Component.Cell, id: id, fill_color: socket.assigns.secondary_color)
     {:noreply, socket}
   end
 
-  def handle_event("paint_cell", id, socket) do
+  def handle_event("paint_cell_primary_color", id, socket) do
     send_update(JpixlWeb.Component.Cell, id: id, fill_color: socket.assigns.primary_color)
     {:noreply, socket}
   end
