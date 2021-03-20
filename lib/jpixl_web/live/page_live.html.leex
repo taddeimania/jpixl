@@ -40,7 +40,7 @@
                         </div>
                         <div class="preview-area">
                             <%= for row <- 0..@canvas_width-1 do %>
-                                <div>
+                                <div style="height: 4px">
                                     <%= for column <- 0..@canvas_height-1 do %>
                                         <div class="preview-grid-box">
                                             <div style="background-color: <%= get_pixel(@state, row, column) %>" class="cell-contents">
@@ -61,20 +61,10 @@
                 <div class="working-grid">
                     <fieldset>
                         <div class="drawing-area">
-                            <%= for row <- 0..@canvas_width-1 do %>
+                            <%= for row <- 0..@canvas_height-1 do %>
                                 <div>
-                                    <%= for column <- 0..@canvas_height-1 do %>
-                                        <div class="grid-box" oncontextmenu="return false;" phx-hook="Clicky" id=<%= "#{row}_#{column}" %>
-                                             data-row="<%= row %>" data-column="<%= column %>" draggable="false"
-                                            <%= if @show_grid === true do %>
-                                               style="border: 1px solid #F0F0F0;
-         box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;"
-                                            <% end %>>
-                                            <div style="background-color: <%= get_pixel(@state, row, column) %>" class="cell-contents" draggable="false">
-                                            </div>
-                                        </div>
+                                    <%= for column <- 0..@canvas_width-1 do %>
+                                        <%= live_component(@socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", row: row, column: column, color: @state |> Map.get({row, column}), show_grid: @show_grid) %>
                                     <% end %>
                                 </div>
                             <% end %>

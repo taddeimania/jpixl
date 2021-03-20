@@ -5,10 +5,10 @@ defmodule JpixlWeb.PageLive do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(primary_color: "black")
+      |> assign(primary_color: "#000")
       |> assign(secondary_color: "")
-      |> assign(canvas_height: 32)
-      |> assign(canvas_width: 32)
+      |> assign(canvas_height: 16)
+      |> assign(canvas_width: 16)
       |> assign(state: new_state())
       |> assign(show_grid: false)
     {:ok, socket}
@@ -68,23 +68,18 @@ defmodule JpixlWeb.PageLive do
         |> assign(show_grid: false)
       }
     end
-
   end
 
   defp new_state() do
-    for row <- 0..31 do
-      for row <- 0..31 do
-        ""
-      end
-    end
+    %{}
   end
 
   defp get_pixel(state, row, col) do
-    state |> Enum.at(row) |> Enum.at(col)
+    state |> Map.get({row, col})
   end
 
   defp set_pixel(state, row, col, val) do
-    List.replace_at(state, row, state |> Enum.at(row) |> List.replace_at(col, val))
+    state |> Map.put({row, col}, val)
   end
 
 end

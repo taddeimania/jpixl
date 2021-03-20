@@ -22,22 +22,26 @@ Hooks.Clicky = {
     mounted(){
         this.el.addEventListener('mousedown', e => {
             let data = e.currentTarget.dataset
+            const matches = e.currentTarget.id.match(/(\d*)_(\d*)/);
+            const cords = {row: matches[1], column: matches[2]}
             if (e.button === 2) {
-                this.pushEvent("paint_cell_secondary_color", data);
+                this.pushEvent("paint_cell_secondary_color", cords);
             } else {
-                this.pushEvent("paint_cell_primary_color", data);
+                this.pushEvent("paint_cell_primary_color", cords);
             }
         });
         this.el.addEventListener('mouseover', e => {
             let data = e.currentTarget.dataset
+            const matches = e.currentTarget.id.match(/(\d*)_(\d*)/);
+            const cords = {row: matches[1], column: matches[2]}
             this.el.style = "border: 1px solid #F0F0F0;\n" +
                 "         box-sizing: border-box;\n" +
                 "    -moz-box-sizing: border-box;\n" +
                 "    -webkit-box-sizing: border-box;\"";
             if (e.buttons === 2) {
-                this.pushEvent("paint_cell_secondary_color", data);
+                this.pushEvent("paint_cell_secondary_color", cords);
             } else if (e.buttons === 1) {
-                this.pushEvent("paint_cell_primary_color", data);
+                this.pushEvent("paint_cell_primary_color", cords);
             }
         });
 
@@ -106,7 +110,9 @@ let liveSocket = new LiveSocket(
         params: {
             _csrf_token: csrfToken
         }
-    })
+    }
+);
+
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
