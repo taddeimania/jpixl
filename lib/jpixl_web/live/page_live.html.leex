@@ -64,7 +64,17 @@
                             <%= for row <- 0..@canvas_width-1 do %>
                                 <div>
                                     <%= for column <- 0..@canvas_height-1 do %>
-                                        <%= live_component @socket, JpixlWeb.Component.Cell, id: "#{row}_#{column}", row: row, column: column, color: get_pixel(@state, row, column), show_grid: @show_grid %>
+                                        <div class="grid-box" oncontextmenu="return false;" phx-hook="Clicky"
+                                             data-row="<%= row %>" data-column="<%= column %>" draggable="false"
+                                            <%= if @show_grid === true do %>
+                                               style="border: 1px solid #F0F0F0;
+         box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;"
+                                            <% end %>>
+                                            <div style="background-color: <%= get_pixel(@state, row, column) %>" class="cell-contents" draggable="false">
+                                            </div>
+                                        </div>
                                     <% end %>
                                 </div>
                             <% end %>
