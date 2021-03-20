@@ -4,30 +4,28 @@
   background-color: silver;
 }
 .drawing-area {
-  display: inline-flex;
-  flex-wrap: wrap;
-  width: 1024px;
-  overflow: auto;
 }
 .grid-box {
   cursor: crosshair;
+  display: inline-block;
   width: 32px;
   height: 32px;
   background-color: white;
-  margin: 0;
+  margin: -2px 0 0 -2px;
   padding: 0;
-}
-.preview-area {
-  display: inline-flex;
-  flex-wrap: wrap;
-  overflow: auto;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 .preview-grid-box {
   width: 4px;
   height: 4px;
+  display: inline-block;
+  margin: 0 0 0 -2px;
   border: 0;
   background-color: white;
-  margin: 0;
   padding: 0;
 }
 .cell-contents {
@@ -39,8 +37,6 @@
 }
 .toolbar-grid {
   width: 300px;
-}
-.working-grid {
 }
 .color-pick {
   cursor: pointer;
@@ -66,5 +62,11 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.working-grid {
+  white-space:nowrap;
+}
+.working-grid > fieldset {
+  display: inline-table
 }
 [x-cloak] { display: none; }

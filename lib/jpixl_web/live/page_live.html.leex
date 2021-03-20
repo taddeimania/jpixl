@@ -64,7 +64,7 @@
                             <%= for row <- 0..@canvas_width-1 do %>
                                 <div>
                                     <%= for column <- 0..@canvas_height-1 do %>
-                                        <div class="grid-box" oncontextmenu="return false;" phx-hook="Clicky"
+                                        <div class="grid-box" oncontextmenu="return false;" phx-hook="Clicky" id=<%= "#{row}_#{column}" %>
                                              data-row="<%= row %>" data-column="<%= column %>" draggable="false"
                                             <%= if @show_grid === true do %>
                                                style="border: 1px solid #F0F0F0;
